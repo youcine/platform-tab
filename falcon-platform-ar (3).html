@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>المنصة | منصة واحدة. كل أداة تحتاجها. فالكون إنفورماتيكس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,300&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --fi-navy:   #1a2e44;
+  --fi-blue:   #1B5FAF;
+  --fi-sky:    #3A9BD5;
+  --fi-teal:   #2A8C82;
+  --fi-green:  #3AAD6E;
+  --fi-gold:   #E8B94F;
+  --fi-amber:  #F5A623;
+  --fi-light:  #F4F7FC;
+  --fi-cream:  #FAFAF7;
+  --fi-white:  #FFFFFF;
+  --fi-muted:  #6B7A8D;
+  --fi-border: #E4EAF2;
+  --fi-shadow: rgba(13,42,74,0.09);
+  --ft-bg: #1a2e44;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--fi-cream);
+  color: var(--fi-navy);
+  overflow-x: hidden;
+  line-height: 1.8;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5,
+.card-name, .drop-hd, footer h4, .ft-col h4, .page-lbl {
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* ══ NAV ══ */
+nav {
+  position: sticky; top: 0; z-index: 300;
+  background: #fff;
+  border-bottom: 1px solid #e0e7ef;
+  height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  direction: rtl;
+}
+.nav-logo img { height: 44px; width: auto; display: block; }
+
+.nav-links { display: flex; list-style: none; height: 100%; flex-direction: row-reverse; }
+.nav-links > li {
+  position: relative; height: 100%;
+  display: flex; align-items: center;
+}
+.nav-links > li > a {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: #445566;
+  text-decoration: none;
+  padding: 0 13px; height: 100%;
+  display: flex; align-items: center; gap: 3px;
+  border-bottom: 3px solid transparent;
+  transition: color .18s, border-color .18s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover { color: var(--fi-navy); border-bottom-color: var(--fi-blue); }
+.nav-links > li > a.active {
+  color: var(--fi-blue); font-weight: 800;
+  border-bottom-color: var(--fi-blue);
+}
+.nav-arr { font-size: 9px; opacity: .4; transition: transform .18s; }
+.nav-links > li:hover .nav-arr { transform: rotate(180deg); }
+
+.nav-links > li:hover .drop { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.drop {
+  position: absolute; top: calc(100% + 1px); right: 0; left: auto;
+  min-width: 210px;
+  background: #fff;
+  border: 1px solid #e0e7ef;
+  border-top: 3px solid var(--fi-blue);
+  border-radius: 0 0 9px 9px;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.11);
+  padding: 8px 0;
+  opacity: 0; pointer-events: none;
+  transform: translateY(7px);
+  transition: opacity .18s, transform .18s;
+  text-align: right;
+}
+.drop a {
+  display: block; padding: 8px 20px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px; color: #556070;
+  text-decoration: none;
+  transition: background .12s, color .12s, padding-right .12s;
+}
+.drop a:hover { background: var(--fi-light); color: var(--fi-navy); padding-right: 24px; }
+.drop-hd {
+  padding: 10px 20px 4px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: .04em;
+  text-transform: uppercase; color: #aabbcc;
+}
+
+/* ══ GRID ══ */
+.tools-section { padding: 48px 80px 80px; background: var(--fi-cream); }
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* ══ CARD ══ */
+.card {
+  background: var(--fi-white);
+  border: 1px solid var(--fi-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: transform .24s cubic-bezier(.22,1,.36,1), box-shadow .24s, border-color .24s;
+  animation: fadeUp .42s both;
+  text-align: right;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px var(--fi-shadow);
+  border-color: rgba(27,95,175,0.2);
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, linear-gradient(90deg, var(--fi-blue), var(--fi-sky)));
+  border-radius: 16px 16px 0 0;
+  opacity: 0; transition: opacity .24s;
+}
+.card:hover::before { opacity: 1; }
+
+.card-img {
+  width: 100%; height: 155px;
+  border-radius: 14px 14px 0 0;
+  background: var(--card-img-bg, #f0f4fa);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0;
+}
+.card-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  background: var(--card-img-bg, rgba(27,95,175,0.05));
+}
+.ph-icon { font-size: 30px; }
+.ph-text {
+  font-size: 10px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--fi-muted); opacity: .5;
+}
+
+.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.card-name {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 17px; font-weight: 900;
+  color: var(--fi-navy); margin-bottom: 4px;
+}
+.card-tagline {
+  font-size: 11px; font-weight: 700;
+  color: var(--card-color, var(--fi-blue));
+  margin-bottom: 10px;
+}
+.card-desc {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px; line-height: 1.75;
+  color: var(--fi-muted); flex: 1; margin-bottom: 14px;
+}
+
+.card-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  flex-direction: row-reverse;
+}
+.card-badge {
+  font-size: 10px; font-weight: 700;
+  color: var(--card-color, var(--fi-blue));
+  background: var(--card-icon-bg, rgba(27,95,175,0.08));
+  padding: 3px 9px; border-radius: 100px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-cta {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 12px; font-weight: 800;
+  color: var(--card-color, var(--fi-blue));
+  text-decoration: none;
+  border: 1.5px solid currentColor;
+  padding: 5px 13px; border-radius: 7px;
+  white-space: nowrap; flex-shrink: 0;
+  transition: background .16s, color .16s, transform .14s;
+}
+.card-cta:hover {
+  background: var(--card-color, var(--fi-blue));
+  color: #fff; transform: translateY(-1px);
+}
+
+.card-empty { border: 2px dashed var(--fi-border); background: transparent; }
+.card-empty-badge {
+  margin-top: 16px; font-size: 11px; font-weight: 500;
+  color: var(--fi-muted); opacity: .4;
+  display: flex; align-items: center; justify-content: center;
+  font-style: normal;
+}
+
+.c-blue    { --card-color:#1B5FAF; --card-icon-bg:rgba(27,95,175,0.08);  --card-accent:linear-gradient(90deg,#1B5FAF,#3A9BD5); --card-img-bg:rgba(27,95,175,0.04); }
+.c-teal    { --card-color:#2A8C82; --card-icon-bg:rgba(42,140,130,0.09); --card-accent:linear-gradient(90deg,#2A8C82,#3AAD6E); --card-img-bg:rgba(42,140,130,0.04); }
+.c-green   { --card-color:#3AAD6E; --card-icon-bg:rgba(58,173,110,0.09); --card-accent:linear-gradient(90deg,#3AAD6E,#2A8C82); --card-img-bg:rgba(58,173,110,0.04); }
+.c-gold    { --card-color:#C8860A; --card-icon-bg:rgba(232,185,79,0.09); --card-accent:linear-gradient(90deg,#E8B94F,#F5A623); --card-img-bg:rgba(232,185,79,0.05); }
+.c-sky     { --card-color:#3A9BD5; --card-icon-bg:rgba(58,155,213,0.09); --card-accent:linear-gradient(90deg,#3A9BD5,#1B5FAF); --card-img-bg:rgba(58,155,213,0.04); }
+.c-orange  { --card-color:#E8650A; --card-icon-bg:rgba(232,101,10,0.08); --card-accent:linear-gradient(90deg,#E8650A,#F5A623); --card-img-bg:rgba(232,101,10,0.04); }
+.c-yellow  { --card-color:#B8860B; --card-icon-bg:rgba(245,166,35,0.09); --card-accent:linear-gradient(90deg,#F5A623,#E8B94F); --card-img-bg:rgba(245,166,35,0.04); }
+
+/* ══ HERO ══ */
+.hero {
+  padding: 64px 80px 52px;
+  position: relative;
+  overflow: hidden;
+  background: var(--fi-cream);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 55%;
+  background-image:
+    radial-gradient(circle, #B8C4D0 1px, transparent 1px),
+    radial-gradient(circle, #C8D2DC 1px, transparent 1px);
+  background-size: 32px 32px, 48px 48px;
+  background-position: 0 0, 16px 16px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 2; max-width: 640px; text-align: right; }
+.hero h1 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--fi-navy);
+  letter-spacing: 0;
+}
+.hero h1 span {
+  display: block;
+  background: linear-gradient(135deg, var(--fi-blue), var(--fi-teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card:nth-child(1){animation-delay:.03s}.card:nth-child(2){animation-delay:.07s}
+.card:nth-child(3){animation-delay:.11s}.card:nth-child(4){animation-delay:.15s}
+.card:nth-child(5){animation-delay:.19s}.card:nth-child(6){animation-delay:.23s}
+.card:nth-child(7){animation-delay:.27s}.card:nth-child(8){animation-delay:.31s}
+.card:nth-child(9){animation-delay:.35s}.card:nth-child(10){animation-delay:.39s}
+.card:nth-child(11){animation-delay:.43s}
+
+/* ══ PLATFORM TAGLINE ══ */
+.platform-tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 64px;
+  padding: 0 40px 16px;
+}
+.tagline-deco {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--fi-border));
+  max-width: 200px;
+}
+.tagline-deco-right {
+  background: linear-gradient(90deg, var(--fi-border), transparent);
+}
+.tagline-text {
+  font-family: 'Amiri', serif;
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--fi-blue), var(--fi-teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* ══ FOOTER ══ */
+footer {
+  background: var(--ft-bg);
+  padding: 60px 80px 0;
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+.ft-top {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 56px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.ft-brand img {
+  height: 38px;
+  filter: brightness(0) invert(1); opacity: .82;
+  display: block; margin-bottom: 16px;
+}
+.ft-brand p {
+  font-size: 13px; line-height: 1.8;
+  color: rgba(255,255,255,0.4); margin-bottom: 16px;
+}
+.ft-contact a {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; color: rgba(255,255,255,0.48);
+  text-decoration: none; margin-bottom: 7px;
+  transition: color .15s; flex-direction: row-reverse; justify-content: flex-end;
+}
+.ft-contact a:hover { color: #E8B94F; }
+.ft-contact svg { opacity: .5; flex-shrink: 0; }
+.ft-addr {
+  font-size: 12px; color: rgba(255,255,255,0.28);
+  line-height: 1.7; margin-top: 12px;
+}
+.ft-cols {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+.ft-col h4 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 12px; font-weight: 800;
+  color: rgba(255,255,255,0.82); margin-bottom: 14px;
+}
+.ft-col a {
+  display: block; margin-bottom: 8px;
+  font-size: 12.5px; color: rgba(255,255,255,0.4);
+  text-decoration: none; transition: color .15s;
+}
+.ft-col a:hover { color: rgba(255,255,255,0.85); }
+.ft-col h4 + h4 { margin-top: 20px; }
+
+.ft-connect {
+  display: flex; align-items: center; gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-wrap: wrap; flex-direction: row-reverse;
+}
+.ft-connect-lbl {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 11px; font-weight: 800;
+  color: rgba(255,255,255,0.3);
+}
+.ft-social { display: flex; gap: 8px; }
+.ft-social a {
+  width: 32px; height: 32px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.42); text-decoration: none; font-size: 13px;
+  transition: all .15s;
+}
+.ft-social a:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.22); }
+.ft-support {
+  margin-right: auto; margin-left: 0; display: flex; gap: 22px; flex-wrap: wrap;
+  font-size: 12px; color: rgba(255,255,255,0.25);
+}
+.ft-support a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color .15s; }
+.ft-support a:hover { color: #E8B94F; }
+
+.ft-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 0; gap: 14px; flex-wrap: wrap;
+}
+.ft-copy { font-size: 12px; color: rgba(255,255,255,0.26); }
+.ft-copy strong { color: rgba(255,255,255,0.45); font-weight: 700; }
+.ft-legal { display: flex; gap: 16px; }
+.ft-legal a {
+  font-size: 12px; color: rgba(255,255,255,0.26);
+  text-decoration: none; transition: color .15s;
+}
+.ft-legal a:hover { color: rgba(255,255,255,0.65); }
+
+@media(max-width:1280px) { .tools-grid { grid-template-columns: repeat(3,1fr); } .ft-cols { grid-template-columns: repeat(3,1fr); } }
+@media(max-width:960px) {
+  nav { padding: 0 20px; } .nav-links { display: none; }
+  .tools-section { padding: 32px 20px 60px; }
+  .tools-grid { grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .ft-top { grid-template-columns: 1fr; gap: 36px; }
+  .ft-cols { grid-template-columns: repeat(2,1fr); }
+  footer { padding: 44px 24px 0; }
+}
+@media(max-width:560px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .ft-cols { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <ul class="nav-links">
+    <li><a href="https://falconinformatics.com/">الرئيسية</a></li>
+    <li>
+      <a href="#" class="active">المنصة <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">أدوات المنصة</div>
+        <a href="#">Nusrat</a><a href="#">Ashify</a><a href="#">Scribes</a>
+        <a href="#">Krufe</a><a href="#">BIN</a><a href="#">Parse</a>
+        <a href="#">Muhasiba</a><a href="#">Phi</a><a href="#">Tahdir</a>
+        <a href="#">Skunk</a><a href="#">Squire</a><a href="#">Hexon</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">المنتجات <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">المنتجات</div>
+        <a href="#">Abjadiyah</a><a href="#">Husool</a><a href="#">Jusafer</a>
+        <a href="#">Manar</a><a href="#">Safhat</a><a href="#">UmLama</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">المشاريع <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">المشاريع</div>
+        <a href="#">علم البيانات</a><a href="#">ERP</a><a href="#">ذكاء الأعمال</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">البحث <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">البحث والتطوير</div>
+        <a href="#">أوراق بحثية</a><a href="#">أوراق بيضاء</a>
+        <a href="#">براءات الاختراع</a><a href="#">دراسات الحالة</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">الحلول <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">الحلول</div>
+        <a href="#">تحليل البيانات</a><a href="#">تصور البيانات</a>
+        <a href="#">الذكاء الاصطناعي</a><a href="#">تعلم الآلة</a>
+        <a href="#">معالجة اللغة</a><a href="#">التحليل التنبؤي</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">الاستشارات <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">الاستشارات</div>
+        <a href="#">الحوسبة السحابية</a><a href="#">أمن المعلومات</a>
+        <a href="#">إنترنت الأشياء</a><a href="#">البنية التحتية</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">القطاعات <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">القطاعات</div>
+        <a href="#">المالية والمصرفية</a><a href="#">الرعاية الصحية</a>
+        <a href="#">التصنيع</a><a href="#">الطاقة والمرافق</a>
+        <a href="#">الحكومة</a><a href="#">التعليم</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">الشركاء <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">الشركاء</div>
+        <a href="#">التكنولوجيا</a><a href="#">الأكاديميون</a>
+        <a href="#">الاستشاريون</a><a href="#">الموزعون</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">من نحن <span class="nav-arr">▾</span></a>
+      <div class="drop">
+        <div class="drop-hd">من نحن</div>
+        <a href="#">رسالتنا</a><a href="#">رؤيتنا</a>
+        <a href="#">قيمنا</a><a href="#">تواصل معنا</a>
+      </div>
+    </li>
+  </ul>
+  <a href="https://falconinformatics.com" class="nav-logo">
+    <img src="images/logo.png" alt="شعار فالكون">
+  </a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-text">
+
+  </div>
+</section>
+
+<!-- ══ TOOLS ══ -->
+<section class="tools-section">
+  <div class="tools-grid">
+
+    <!-- 1. Scribes -->
+    <div class="card c-orange">
+      <div class="card-img">
+        <img src="images/scribes.jpeg" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">Scribes</div>
+        <div class="card-tagline">ذكاء الفواتير</div>
+        <p class="card-desc">ارفع فواتيرك وإيصالاتك وعروض الأسعار بأي صيغة: PDF أو صور أو لقطات شاشة. يقوم Scribes بهيكلة بياناتك وتحليلها وتصويرها على الفور.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">مالية · OCR · تحليلات</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Ashify -->
+    <div class="card c-green">
+      <div class="card-img">
+        <img src="images/ashify.jpeg" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">Ashify</div>
+        <div class="card-tagline">أداة تحويل البيانات</div>
+        <p class="card-desc">أداة متكاملة لتحويل البيانات واستبدالها. تعدّل بياناتك بالكامل باستبدال القيم الحقيقية ببيانات وهمية. بياناتك الأصلية لن تُكشف أبدًا.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">خصوصية · تشفير · ETL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BIN -->
+    <div class="card c-blue">
+      <div class="card-img">
+        <img src="images/BIN.png" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">BIN</div>
+        <div class="card-tagline">مستكشف البنية التحتية للأعمال</div>
+        <p class="card-desc">محرك ذكي لتوليد البنية التنظيمية تلقائيًا لأي حجم من الأعمال. يبني مخطط بنيتك التحتية الكاملة بشكل أوتوماتيكي.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">تصميم · هيكلة · توليد آلي</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Parse -->
+    <div class="card c-yellow">
+      <div class="card-img">
+        <img src="images/parse.png" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">Parse</div>
+        <div class="card-tagline">محرك ذكاء النصوص</div>
+        <p class="card-desc">محرك ذكاء نصي قوي مصمم لتحويل النصوص غير المهيكلة إلى بيانات نظيفة ومنظمة وقابلة للتنفيذ بسهولة تامة.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">NLP · هيكلة · تحليلات</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Muhasiba -->
+    <div class="card c-gold">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.4;">⏱️</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">محاسبة</div>
+        <div class="card-tagline">إدارة القوى العاملة</div>
+        <p class="card-desc">نظام ذكي لإدارة الدوام والقوى العاملة للشركات التي تدير فرقًا ميدانية ومهندسين. يؤتمت الجداول الزمنية والعمل الإضافي والإجازات وحسابات الرواتب.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">HR · الرواتب · الجداول</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Tahdir -->
+    <div class="card c-green">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.4;">📋</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">تحضير</div>
+        <div class="card-tagline">نظام تقييم الموردين</div>
+        <p class="card-desc">قارن عروض أسعار الموردين وقيّم أداءهم واختر الأفضل بناءً على السعر والجودة والشروط والمخاطر.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">مشتريات · موردون · تقييم</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Squire -->
+    <div class="card c-teal">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.4;">⚡</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Squire</div>
+        <div class="card-tagline">أتمتة وسير العمل</div>
+        <p class="card-desc">أداة ذكية للأتمتة وإدارة سير العمل مصممة للقضاء على الاحتكاك اليدوي وتسريع العمليات المتكررة عبر عمليات أعمالك.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">أتمتة · سير العمل · سرعة</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Hexon -->
+    <div class="card c-sky">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.35;font-size:34px;">⬡</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Hexon</div>
+        <div class="card-tagline">أداة رقمية متعددة الاستخدامات</div>
+        <p class="card-desc">يُبسّط المهام التشغيلية الأساسية، بما فيها توليد الباركود ورمز QR، وتحويل الوحدات، وتعيين عناوين IP، وإدارة الأصول. مبني لتحقيق الكفاءة والدقة وقابلية التوسع.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">QR · باركود · IP · الأصول</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Krufe -->
+    <div class="card c-sky">
+      <div class="card-img">
+        <img src="images/Krufe.png" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">Krufe</div>
+        <div class="card-tagline">مهندس قواعد البيانات</div>
+        <p class="card-desc">صمّم. ولّد. احشُ. مهندس قواعد البيانات الفوري الذي يُنشئ مخططات ER وهياكل منظمة وقواعد بيانات جاهزة للإنتاج في ثوانٍ.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">قواعد بيانات · ER · SQL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Phi -->
+    <div class="card c-gold">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.3;font-size:36px;font-family:serif;">φ</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Phi</div>
+        <div class="card-tagline">منصة تجهيز بيانات ERP</div>
+        <p class="card-desc">منصة هيكلة البيانات المصممة لمساعدة المؤسسات على الاستعداد لتطبيق ERP قبل البدء الفعلي. تُمكّن الشركات من فهم بياناتها الرئيسية وتنظيمها وتوحيدها وفق حجمها وصناعتها.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">ERP · البيانات الرئيسية · تجهيز</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Skunk -->
+    <div class="card c-teal">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <span class="ph-icon" style="opacity:0.4;">🗺️</span>
+          <span class="ph-text">قريبًا</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Skunk</div>
+        <div class="card-tagline">مسح الأراضي وتحليل القطع</div>
+        <p class="card-desc">أداة مسح أراضي احترافية عبر الإنترنت للمساحين والبلديات والمطورين. تؤتمت التحقق المساحي وحسابات المسح وإنشاء الخرائط المتوافقة.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">GIS · مساحة · جيومكاني</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Nusrat -->
+    <div class="card c-blue">
+      <div class="card-img">
+        <img src="images/Nusrat.jpeg" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="card-body">
+        <div class="card-name">نصرت</div>
+        <div class="card-tagline">ذكاء العقارات</div>
+        <p class="card-desc">منصة ذكاء عقاري تجمع بيانات العقارات وإشارات السوق ورؤى الموقع في عرض واحد واضح. استكشف القوائم والأسعار والأحياء.</p>
+        <div class="card-footer-row">
+          <a href="#" class="card-cta">فتح</a>
+          <span class="card-badge">PropTech · بيانات السوق · جغرافي</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ CLOSING TAGLINE ══ -->
+  <div class="platform-tagline">
+    <span class="tagline-deco tagline-deco-left"></span>
+    <p class="tagline-text">منصة لكل عملية تجارية</p>
+    <span class="tagline-deco tagline-deco-right"></span>
+  </div>
+
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="شعار فالكون">
+      <p>شركة عالمية للتحول الرقمي متخصصة في ERP وعلم البيانات والأنظمة الذكية والعمليات الرقمية.</p>
+      <div class="ft-contact">
+        <a href="mailto:info@falconinformatics.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 4l10 8 10-8"/>
+          </svg>
+          info@falconinformatics.com
+        </a>
+        <a href="tel:+919133277911">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 010 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          +91 91332 77911
+        </a>
+      </div>
+      <p class="ft-addr">المقر الرئيسي: 1، برج تقنية المعلومات،<br>كاريمناغار، تيلانغانا – 505001، الهند</p>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4>المنتجات</h4>
+        <a href="#">Abjadiyah</a><a href="#">Husool</a><a href="#">Jusafer</a>
+        <a href="#">Manar</a><a href="#">Safhat</a><a href="#">UmLama</a>
+      </div>
+      <div class="ft-col">
+        <h4>القطاعات</h4>
+        <a href="#">الزراعة والمزارع</a><a href="#">التجارة الإلكترونية</a>
+        <a href="#">الطاقة والمرافق</a><a href="#">المالية والمصرفية</a>
+        <a href="#">الرعاية الصحية</a><a href="#">التصنيع</a>
+      </div>
+      <div class="ft-col">
+        <h4>الحلول</h4>
+        <a href="#">التوصيف</a><a href="#">تحليل البيانات</a>
+        <a href="#">جمع البيانات</a><a href="#">إعداد التقارير</a>
+        <a href="#">الذكاء الاصطناعي</a><a href="#">معالجة البيانات</a>
+        <h4>الاستشارات</h4>
+        <a href="#">الحوسبة السحابية</a><a href="#">أمن المعلومات</a>
+        <a href="#">إنترنت الأشياء</a><a href="#">البنية التحتية</a>
+      </div>
+      <div class="ft-col">
+        <h4>المشاريع</h4>
+        <a href="#">علم البيانات</a><a href="#">ERP</a><a href="#">ذكاء الأعمال</a>
+        <h4>البحث</h4>
+        <a href="#">أوراق بحثية</a><a href="#">أوراق بيضاء</a>
+        <a href="#">دراسات الحالة</a><a href="#">براءات الاختراع</a>
+      </div>
+      <div class="ft-col">
+        <h4>الشركاء</h4>
+        <a href="#">التكنولوجيا</a><a href="#">الأكاديميون</a>
+        <a href="#">الاستشاريون</a><a href="#">الموزعون</a>
+        <h4>من نحن</h4>
+        <a href="#">رؤيتنا</a><a href="#">رسالتنا</a>
+        <a href="#">قيمنا</a><a href="#">تواصل معنا</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-connect">
+    <div class="ft-support">
+      <span>دعم العملاء:&nbsp;<a href="#">support@falconinformatics.com</a></span>
+      <span>المبيعات:&nbsp;<a href="#">sales@falconinformatics.com</a></span>
+    </div>
+    <div class="ft-social">
+      <a href="#" title="LinkedIn">in</a>
+      <a href="#" title="X">𝕏</a>
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="Instagram">◎</a>
+    </div>
+    <span class="ft-connect-lbl">تواصل معنا</span>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-legal">
+      <a href="#">سياسة الخصوصية</a>
+      <a href="#">شروط الاستخدام</a>
+    </div>
+    <div class="ft-copy">
+      <strong>فالكون إنفورماتيكس</strong> — جميع الحقوق محفوظة &copy; 2025
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
